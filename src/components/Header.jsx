@@ -10,7 +10,7 @@ export default function Header() {
         </div>
         <div className='flex gap-5'>
          <i className="fa-brands fa-github text-white text-3xl"></i>
-         <i class="fa-brands fa-linkedin text-white text-3xl"></i>
+         <i className="fa-brands fa-linkedin text-white text-3xl"></i>
         </div>
 
     </div>

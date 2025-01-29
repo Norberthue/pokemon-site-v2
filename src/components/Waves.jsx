@@ -3,7 +3,7 @@ import Wave from 'react-wavify'
 export default function Waves() {
   return (
     <div>
-      <Wave className=''
+      <Wave 
       fill='#060b28'
       paused={false}
       options={{
