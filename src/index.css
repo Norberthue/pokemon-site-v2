@@ -3,4 +3,70 @@
 
 html {
     font-family: "Montserrat", serif;
+    scroll-behavior: smooth;
 }
+
+
+.rock {
+    background: #d8bc5a;  
+  }
+  .ghost {
+    background: #4e6aff; 
+  }
+  .electric {
+    background: #ffde00 ; 
+  }
+  .bug {
+    background: #7bcf00 ; 
+  }
+  .poison {
+    background: #f149ff;  
+  }
+  .normal {
+    background: #9fa39d;  
+  }
+  .fairy {
+    background: #ff76ff;  
+  }
+  .fire {
+    background: #ff9900;   
+}
+  .grass {
+    background: #1cd80e; 
+  }
+  .water {
+    background: #14a8ff;   
+}
+
+  .fighting {
+    background: #ff215b ; 
+  }
+
+  .psychic{
+    background: #ff6c64 ; 
+  }
+
+  .ground {
+    background: #ff6b0d ; 
+  }
+  .flying {
+    background: #89bdff ; 
+  }
+
+  .dark {
+    background: #5a566a ; 
+  }
+
+  .dragon {
+    background: #0076ff;  
+  }
+
+  .ice {
+    background: #2ee4c6;  
+  }
+  .steel {
+    background: #23a1bd ; 
+  }
+
+
+  
