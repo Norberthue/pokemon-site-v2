@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { use } from 'react';
 import Pagination from './Pagination';
 
 export default function PokemonList() {
@@ -12,14 +11,18 @@ export default function PokemonList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(9)
 
+  
+
   async function pokeList() {
-    setIsLoading(true);
+    
+    
     const res = await axios.get(url)
     getPokemon(res.data.results);
-    setIsLoading(false)
+    
   }
 
   async function getPokemon(res) {
+    setIsLoading(true);
     res.map(async (item) =>{
       const result = await axios.get(item.url)
       setPokeData(state => {
@@ -28,6 +31,7 @@ export default function PokemonList() {
         return state;
     })
     })
+    setIsLoading(false)
   }
 
   useEffect(() =>{
@@ -41,27 +45,35 @@ export default function PokemonList() {
   const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
  
-  if (isLoading) return <div className='text-center bg-[#060b28] text-white -mt-15 pb-20 h-screen'>LOADING...</div>;
+  if (isLoading) return <div className='text-center bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (
     <div id='pokemonList' className=' bg-[#060b28] text-white -mt-15 pb-20'>
+        <div className='hidden bg-water bg-rock bg-ghost bg-electric bg-bug
+        bg-poison bg-normal bg-grass bg-fairy bg-fire bg-fighting
+        bg-psychic bg-ground bg-flying bg-dark bg-dragon bg-ice bg-steel
+        from-water from-rock from-ghost from-electric from-bug
+        from-poison from-normal from-grass from-fairy from-fire from-fighting
+        from-psychic from-ground from-flying from-dark from-dragon from-ice from-steel'></div>
         <div className='pt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-36 gap-x-10 max-w-[1200px] m-auto'>
             {currentPokeData.map((pokemon) =>{
+              
               const type = pokemon.types[0].type.name
               const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
               
+              
               return(
                 <div key={pokemon.id} className={`justify-self-center flex  gap-4 flex-col justify-center items-center max-w-[400px] max-h-[1450px]  
-                border-[0.9px] w-full h-full border-[#24293f] rounded-4xl bg-[${type}]    `}
+                border-[0.9px] w-full h-full border-[#24293f] rounded-4xl bg-linear-to-b from-${type}   to-[#060b28]  to-85%` }
                  >
                   <div className=''>
                     <img className='bg-contain 'src={pokemon.sprites.other.home.front_default}></img>
                   </div>
                  
-                  <p className='text-2xl font-semibold'>{pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id}</p>
+                  <p className='text-2xl font-semibold'>{pokemon.id >=100 ? pokemon.id : pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id }</p>
                   <p className='text-4xl capitalize font-semibold'>{pokemon.name}</p>
                   <div className='flex gap-4'>
-                    <p className={`${type} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type}.svg`}></img>{pokemon.types[0].type.name}</p>
-                    {pokemon.types[1] && <p className={`${type2} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type2}.svg`}></img>{pokemon.types[1].type.name}</p>}
+                    <p className={`bg-${type} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type}.svg`}></img>{pokemon.types[0].type.name}</p>
+                    {pokemon.types[1] && <p className={`bg-${type2} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type2}.svg`}></img>{pokemon.types[1].type.name}</p>}
                   </div>
                   <div className='flex gap-4 font-semibold'>
                       <div className='flex flex-col items-center gap-2'>
@@ -75,7 +87,7 @@ export default function PokemonList() {
                         <p>Height</p>
                       </div>
                   </div>
-                  <button className={`cursor-pointer ${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
+                  <button className={`cursor-pointer bg-${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
                 </div>
               )
               

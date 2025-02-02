@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+@theme {
+  --color-rock: oklch(80% 0.1218 93.54);
+  --color-ghost: oklch(66.67% 0.2 259.26);
+  --color-electric: oklch(90% 0.18 100.02);
+  --color-bug: oklch(70% 0.2 145.00);
+  --color-poison: oklch(70% 0.2 320.00);
+  --color-normal: oklch(62.75% 0.05 120.00);
+  --color-fairy: oklch(80% 0.2 320.00);
+  --color-fire: oklch(70% 0.2 70.00);
+  --color-grass: oklch(70% 0.2 145.00);
+  --color-water: oklch(70% 0.2 220.00);
+  --color-fighting: oklch(70% 0.2 20.00);
+  --color-psychic: oklch(70% 0.2 10.00);
+  --color-ground: oklch(70% 0.2 30.00);
+  --color-flying: oklch(70% 0.2 210.00);
+  --color-dark: oklch(35% 0.1 270.00);
+  --color-dragon: oklch(70% 0.2 240.00);
+  --color-ice: oklch(70% 0.2 180.00);
+  --color-steel: oklch(70% 0.2 200.00);
+ 
+  /* ... */
+}
 
 html {
     font-family: "Montserrat", serif;
@@ -7,66 +29,8 @@ html {
 }
 
 
-.rock {
-    background: #d8bc5a;  
-  }
-  .ghost {
-    background: #4e6aff; 
-  }
-  .electric {
-    background: #ffde00 ; 
-  }
-  .bug {
-    background: #7bcf00 ; 
-  }
-  .poison {
-    background: #f149ff;  
-  }
-  .normal {
-    background: #9fa39d;  
-  }
-  .fairy {
-    background: #ff76ff;  
-  }
-  .fire {
-    background: #ff9900;   
-}
-  .grass {
-    background: #1cd80e; 
-  }
-  .water {
-    background: #14a8ff;   
-}
 
-  .fighting {
-    background: #ff215b ; 
-  }
-
-  .psychic{
-    background: #ff6c64 ; 
-  }
-
-  .ground {
-    background: #ff6b0d ; 
-  }
-  .flying {
-    background: #89bdff ; 
-  }
-
-  .dark {
-    background: #5a566a ; 
-  }
-
-  .dragon {
-    background: #0076ff;  
-  }
-
-  .ice {
-    background: #2ee4c6;  
-  }
-  .steel {
-    background: #23a1bd ; 
-  }
-
+  
+  
 
   
