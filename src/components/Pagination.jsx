@@ -7,8 +7,6 @@ export default function Pagination({paginate,totalPosts, postsPerPage, currentPa
     pageNumbers.push(i)
   }
 
-  
-
   const handlePageClick = (number) =>{
     setActivePage(number)
     window.location.href = '#pokemonList'

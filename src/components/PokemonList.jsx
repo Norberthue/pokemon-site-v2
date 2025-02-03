@@ -5,19 +5,26 @@ import SearchPokemons from './SearchPokemons';
 import { data } from 'framer-motion/client';
 
 export default function PokemonList() {
-  
+  //list of pokemons
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?limit=99&offset=0')
   const [pokeData, setPokeData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
  
+  //searching for pokemon
   const [isSearching, setIsSearching] = useState(false)
   const [pokeName, setPokeName] = useState('')
   const [dataPokeName, setDataPokeName] = useState([])
 
+  //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(9)
   const [activePage, setActivePage] = useState(1)
-
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  
+  
   async function pokeList() {
     setIsLoading(true);
     const res = await axios.get(url)
@@ -41,13 +48,6 @@ export default function PokemonList() {
     pokeList()
   },[])
 
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-
   const reset = () => {
     setIsSearching(false)
     setPokeName('')
@@ -55,7 +55,6 @@ export default function PokemonList() {
     setActivePage(1)
   }
 
-  
   if (isLoading) return <div className='text-center bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (
     <div id='pokemonList' className='bg-[#060b28] text-white -mt-15 pb-20'>
@@ -74,7 +73,7 @@ export default function PokemonList() {
             {isSearching && dataPokeName.map((pokemon) =>{
               const type = pokemon.types[0].type.name
               const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
-              
+        
               return(
                 <div key={pokemon.id} className={`justify-self-center flex mt-10  gap-4 flex-col justify-center items-center max-w-[400px] max-h-[1450px]  
                 border-[0.9px] w-full h-full border-[#24293f] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85%` }
@@ -106,9 +105,6 @@ export default function PokemonList() {
               )
               
             })}
-
-
-
 
         <div className='pt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-36 gap-x-10 max-w-[1200px] m-auto'>
             {isSearching === false && currentPokeData.map((pokemon) =>{
