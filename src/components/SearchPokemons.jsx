@@ -15,7 +15,7 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
     return (
     <div className=' flex justify-center items-center'>
         <form>
-            <input  onChange={(event) => {setPokeName(event.target.value)}} placeholder='Search For Pokemon'  ></input>
+            <input value={pokeName}  onChange={(event) => {setPokeName(event.target.value)}} placeholder='Search For Pokemon'  ></input>
             <button onClick={getSoloPokemon} type='submit'>Search</button>
         </form> 
         
