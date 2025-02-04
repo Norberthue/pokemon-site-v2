@@ -4,10 +4,19 @@ import axios from 'axios';
 export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName}) {
     
     async function getSoloPokemon() {
-        if (pokeName !== '')
+        try{
+            if (pokeName !== '')
             var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
             setDataPokeName([res.data])
             setIsSearching(true)
+        }
+        catch(error) {
+            if (error === 'TypeError') {
+                console.log('type error')
+            } else {
+                console.log('404 err')
+            }
+        }
     }
 
     return (
