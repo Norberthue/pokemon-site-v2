@@ -9,7 +9,7 @@ import PokemonList from './components/PokemonList'
 function App() {
   
   return (
-    <div className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-100%  pt-10'>
+    <div className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-30%  pt-10'>
       <Header></Header>
       <MainContext></MainContext>
       <Waves></Waves>

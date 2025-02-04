@@ -8,10 +8,10 @@ export default function MainContext() {
             <img src='assets/images/background-pokeball.svg'></img>
         </div>
         <div className=' flex flex-col gap-4'>
-            <h1 className='text-2xl font-extrabold'>#010</h1>
+            <h1 className='text-2xl font-extrabold'>#094</h1>
             <div>
-                <span className='bg-violet-800 p-2 rounded-lg mr-2 relative pl-7'>Ghost <img src='/assets/pokemonTypes/ghost.svg' className='absolute top-2 left-2'></img></span>
-                <span className='bg-pink-500 p-2 rounded-lg relative pl-7'>Poison <img src='/assets/pokemonTypes/poison.svg' className='absolute top-2 left-2'></img></span>
+                <span className='bg-[#408fff] p-2 rounded-lg mr-2 relative pl-7'>Ghost <img src='/assets/pokemonTypes/ghost.svg' className='absolute top-2 left-2'></img></span>
+                <span className='bg-[#d36dea] p-2 rounded-lg relative pl-7'>Poison <img src='/assets/pokemonTypes/poison.svg' className='absolute top-2 left-2'></img></span>
             </div>
             <h1 className='text-6xl font-extrabold'>GENGAR</h1>
             <p className='text-lg font-medium max-w-[400px]'>Hiding in people's shadows at night, it absorbs their heat. The chill it causes makes the victims shake. 
