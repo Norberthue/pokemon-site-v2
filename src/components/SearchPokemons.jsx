@@ -28,7 +28,7 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
 
     function changeName(event) {
         setPokeName(event.target.value)
-        event.preventDeafault()
+        event.preventDefault()
     }
 
     return (
