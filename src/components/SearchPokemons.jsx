@@ -7,9 +7,11 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
         try{
             if (pokeName !== '')
             var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-            setDataPokeName([res.data])
-            setIsSearching(true)
             setIsSearchingType(false)
+            setIsSearching(true)
+            setDataPokeName([res.data])
+            
+            
         }
         catch(error) {
             if (error === 'TypeError') {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Pagination from './Pagination';
 import SearchPokemons from './SearchPokemons';
-import { data } from 'framer-motion/client';
 import PokeGenerator from './PokeGenerator';
 import SearchByType from './SearchByType'
 
