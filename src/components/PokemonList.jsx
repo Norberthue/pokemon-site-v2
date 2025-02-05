@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Pagination from './Pagination';
 import SearchPokemons from './SearchPokemons';
+import { data } from 'framer-motion/client';
 import PokeGenerator from './PokeGenerator';
 import SearchByType from './SearchByType'
 
@@ -60,7 +61,7 @@ export default function PokemonList() {
     setIsSearchingType(false)
   }
 
-  console.log(dataPokeName)
+ 
 
   if (isLoading) return <div className='text-center bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (
@@ -81,16 +82,16 @@ export default function PokemonList() {
           </div>
          
           <div className='flex flex-col lg:flex-row  justify-between items-center gap-5  pr-4'>
-              <SearchByType setIsSearchingType={setIsSearchingType} setDataPokemonType={setDataPokemonType} setIsSearching={setIsSearching}></SearchByType>
-              <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType}></SearchPokemons>
+              <SearchByType setIsSearchingType={setIsSearchingType}  setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
+              <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
           </div>
           
         </div>
         
-        {isSearchingType && isSearching === false && <PokeGenerator data={dataPokemonType} ></PokeGenerator>}
-        {isSearching && isSearchingType === false && <PokeGenerator data={dataPokeName} ></PokeGenerator>}
-        {isSearching === false && isSearchingType === false &&<PokeGenerator data={currentPokeData} ></PokeGenerator>}
-
+        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
+        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
+        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
+        
         {isSearching === false && isSearchingType === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
     </div>
   )

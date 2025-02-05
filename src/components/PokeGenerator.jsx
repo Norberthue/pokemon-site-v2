@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function PokeGenerator({ data}) {
+export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2}) {
   return (
     <div>
-        {<div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-44 gap-x-10 max-w-[1200px] m-auto'>
+        {isSearching === yes && isSearchingType === yes2 && <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
         {data.map((pokemon) =>{
           const type = pokemon.types[0].type.name
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''

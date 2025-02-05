@@ -6,12 +6,12 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
   const [isLoading, setIsLoading] = useState(false)
 
 
-  async function getPokemonType(url) {
+  async function getPokemonTypeUrl(url) {
     const res = await axios.get(url)
-    getPokemon(res.data.pokemon)
+    getPokemonType(res.data.pokemon)
   }
 
-  async function getPokemon(res) {
+  async function getPokemonType(res) {
    
     res.map(async (item) =>{
         setIsSearching(false)
@@ -45,7 +45,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
         <div className='flex flex-1 gap-1 overflow-x-scroll w-full pr-30 scrollbar'>
            {types.map((type, id) => {
             return(
-                    <div onClick={() => {getPokemonType(type.url)}} key={id} className={`bg-${type.name} p-2 pr-6 rounded-xl capitalize flex gap-2 cursor-pointer`}>
+                    <div onClick={() => {getPokemonTypeUrl(type.url)}} key={id} className={`bg-${type.name} p-2 pr-6 rounded-xl capitalize flex gap-2 cursor-pointer`}>
                         <img src={`../assets/pokemonTypes/${type.name}.svg`}></img>
                         {type.name}
                     </div>
