@@ -30,8 +30,6 @@ export default function PokemonList() {
   const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
   
-  console.log(dataPokemonType)
-
   async function pokeList() {
     setIsLoading(true);
     const res = await axios.get(url)
@@ -82,16 +80,16 @@ export default function PokemonList() {
           </div>
          
           <div className='flex flex-col lg:flex-row  justify-between items-center gap-5  pr-4'>
-              <SearchByType setIsSearchingType={setIsSearchingType} setDataPokemonType={setDataPokemonType}></SearchByType>
-              <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} ></SearchPokemons>
+              <SearchByType setIsSearchingType={setIsSearchingType} setDataPokemonType={setDataPokemonType} setIsSearching={setIsSearching}></SearchByType>
+              <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType}></SearchPokemons>
           </div>
           
         </div>
         
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
-        
+        { isSearchingType && isSearching === false && <PokeGenerator data={dataPokemonType} ></PokeGenerator>}
+        { isSearching && isSearchingType === false && <PokeGenerator data={dataPokeName} ></PokeGenerator>}
+        { isSearching === false && isSearchingType ===false &&<PokeGenerator data={currentPokeData} ></PokeGenerator>
+        }
         {isSearching === false && isSearchingType === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
     </div>
   )

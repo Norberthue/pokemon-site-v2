@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName}) {
+export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType}) {
     
     async function getSoloPokemon() {
         try{
@@ -9,6 +9,7 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
             var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
             setDataPokeName([res.data])
             setIsSearching(true)
+            setIsSearchingType(false)
         }
         catch(error) {
             if (error === 'TypeError') {

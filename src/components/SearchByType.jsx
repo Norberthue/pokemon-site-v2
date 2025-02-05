@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-export default function SearchByType({setDataPokemonType, setIsSearchingType}) {
+export default function SearchByType({setDataPokemonType, setIsSearchingType, setIsSearching}) {
   const [types, setTypes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -14,6 +14,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType}) {
   async function getPokemon(res) {
    
     res.map(async (item) =>{
+        setIsSearching(false)
         setIsLoading(true)
         setIsSearchingType(true)
         setDataPokemonType([])
