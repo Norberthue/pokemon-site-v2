@@ -7,7 +7,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
 
 
   async function getPokemonType(url) {
-    const res = await axios.get(url + '/?limit=100&offset=0')
+    const res = await axios.get(url)
     getPokemon(res.data.pokemon)
   }
 

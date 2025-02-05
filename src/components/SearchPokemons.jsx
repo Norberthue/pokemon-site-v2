@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import axios from 'axios';
 
 export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType}) {
-    
+    const [isLoading, setIsLoading] = useState(false)
     async function getSoloPokemon() {
         try{
-            if (pokeName !== '')
-            var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-            setIsSearchingType(false)
-            setIsSearching(true)
-            setDataPokeName([res.data])
+            if (pokeName !== '') {
+                setIsLoading(true)
+                
+                setIsSearchingType(false)
+                setIsSearching(true)
+                var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+                setDataPokeName([res.data])
+                setIsLoading(false)
             
+            }
+           
             
         }
         catch(error) {
