@@ -1,52 +1,57 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-export default function SearchByType({setDataPokemonType}) {
+export default function SearchByType({setDataPokemonType, setIsSearchingType}) {
   const [types, setTypes] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
 
   async function getPokemonType(url) {
-    const res = await axios.get(url + '/?limit=50&offset=0')
-   
+    const res = await axios.get(url + '/?limit=100&offset=0')
     getPokemon(res.data.pokemon)
   }
 
   async function getPokemon(res) {
+   
     res.map(async (item) =>{
-      const result = await axios.get(item.pokemon.url)
-        console.log(result)
-      //   setDataPokemonType(state => {
-    //     state = [...state, result.data] 
-    //     state.sort((a, b) => a.id > b.id ? 1 : -1)
-    //     return state;
-    //   })
+        setIsLoading(true)
+        setIsSearchingType(true)
+        setDataPokemonType([])
+        const result = await axios.get(item.pokemon.url)
+        setDataPokemonType(state => {
+        state = [...state, result.data] 
+        setIsLoading(false)
+        return state;
+      })
     }) 
+    
   }
 
-
-  
   useEffect(() => {
     const getAllTypes = async () => {
         const res = await axios.get('https://pokeapi.co/api/v2/type/?limit=18&offset=0')
         setTypes(res.data.results)
-    }
-    
+    } 
     getAllTypes().catch(console.error)
-    
-   
   },[])
 
-  
+
+  if (isLoading) return <div className='text-center bg-[#060b28] text-white  h-screen w-screen'>LOADING...</div>;
+
     return (
-    <div className='flex gap-1 '>
-        {types.map((type, id) => {
+    <div className='flex flex-col gap-2 max-w-[300px] items-center lg:items-start lg:max-w-[550px] lg:ml-5'>
+        <h1 className='text-2xl font-semibold'>Search by types</h1>
+        <div className='flex flex-1 gap-1 overflow-x-scroll w-full pr-30 scrollbar'>
+           {types.map((type, id) => {
             return(
-                    <div onClick={() => {getPokemonType(type.url)}} key={id} className={`bg-${type.name}`}>
+                    <div onClick={() => {getPokemonType(type.url)}} key={id} className={`bg-${type.name} p-2 pr-6 rounded-xl capitalize flex gap-2 cursor-pointer`}>
+                        <img src={`../assets/pokemonTypes/${type.name}.svg`}></img>
                         {type.name}
                     </div>
             )
-            
         })}
+        </div>
+       
     </div>
   )
 }

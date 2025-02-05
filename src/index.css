@@ -28,9 +28,33 @@ html {
     scroll-behavior: smooth;
 }
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
+    overflow-y: auto;
+  overflow-x: hidden;
+    
+  }
 
 
   
-  
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #223ba8;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #415bcf;
+    border-radius: 100vh;
+    
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #4c4fff;
+  }
+}
+
+
 
   

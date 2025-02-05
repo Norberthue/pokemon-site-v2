@@ -1,16 +1,16 @@
 import React from 'react'
 
-export default function PokeGenerator({isSearching, data, yes}) {
+export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2}) {
   return (
     <div>
-        {isSearching === yes && <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-36 gap-x-10 max-w-[1200px] m-auto'>
+        {isSearching === yes && isSearchingType === yes2 && <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-44 gap-x-10 max-w-[1200px] m-auto'>
         {data.map((pokemon) =>{
           const type = pokemon.types[0].type.name
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
     
           return(
             <div key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
-            border-[0.9px] w-full h-[400px]  border-[#24293f] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}
+            border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}
              >
               
                 <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
