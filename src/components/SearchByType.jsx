@@ -40,7 +40,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
   if (isLoading) return <div className='text-center bg-[#060b28] text-white  h-screen w-screen'>LOADING...</div>;
 
     return (
-    <div className='flex flex-col gap-2 max-w-[300px] items-center lg:items-start lg:max-w-[550px] lg:ml-5'>
+    <div className='flex flex-col gap-2 max-w-[300px] items-center lg:items-start lg:max-w-[550px] lg:ml-5 xl:ml-0'>
         <h1 className='text-2xl font-semibold'>Search by types</h1>
         <div className='flex flex-1 gap-1 overflow-x-scroll w-full pr-30 scrollbar'>
            {types.map((type, id) => {
