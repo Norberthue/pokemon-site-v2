@@ -12,18 +12,18 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
   }
 
   async function getPokemonType(res) {
-   
-    res.map(async (item) =>{
+    res.map(async (item) => {
         setIsSearching(false)
         setIsLoading(true)
         setIsSearchingType(true)
         setDataPokemonType([])
         const result = await axios.get(item.pokemon.url)
-        setDataPokemonType(state => {
-        state = [...state, result.data] 
-        setIsLoading(false)
-        return state;
+        setDataPokemonType((state) => {
+          state = [...state, result.data] 
+          state.sort((a, b) => a.id > b.id ? 1 : -1)
+          return state;
       })
+        setIsLoading(false)
     }) 
     
   }

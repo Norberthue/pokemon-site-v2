@@ -7,13 +7,21 @@ import PokemonList from './components/PokemonList'
 
 
 function App() {
+  //detail info 
+  const [pokeDetailName, setPokeDetailName] = useState('')
+  const [isDetail, setIsDetail] = useState(false)
   
+  function turnOffDetail() {
+    IsDetail(false)
+    setPokeDetailName('')
+ }
+
   return (
-    <div className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-30%  pt-10'>
+    <div onClick={() => {turnOffDetail}} className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-30%  pt-10'>
       <Header></Header>
       <MainContext></MainContext>
       <Waves></Waves>
-      <PokemonList></PokemonList>
+      <PokemonList pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail}></PokemonList>
     </div>
   )
 }

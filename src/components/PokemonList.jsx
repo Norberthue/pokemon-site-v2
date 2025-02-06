@@ -6,7 +6,7 @@ import { data } from 'framer-motion/client';
 import PokeGenerator from './PokeGenerator';
 import SearchByType from './SearchByType'
 
-export default function PokemonList() {
+export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
   //list of pokemons
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?limit=99&offset=0')
   const [pokeData, setPokeData] = useState([])
@@ -29,6 +29,8 @@ export default function PokemonList() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+  
   
   async function pokeList() {
     setIsLoading(true);
@@ -59,6 +61,8 @@ export default function PokemonList() {
     setActivePage(1)
     setDataPokemonType([])
     setIsSearchingType(false)
+    setIsDetail(false)
+    setPokeDetailName('')
   }
 
  
@@ -85,12 +89,11 @@ export default function PokemonList() {
               <SearchByType setIsSearchingType={setIsSearchingType}  setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
               <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
           </div>
-          
         </div>
         
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
-        <PokeGenerator isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
+        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
+        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
+        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
         
         {isSearching === false && isSearchingType === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
     </div>

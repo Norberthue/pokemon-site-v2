@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import DetailPokemon from './DetailPokemon'
 
-export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2}) {
+export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2 , pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
+  
+  
+  function getPokemonDetail(pokemon) {
+      setPokeDetailName(pokemon)
+      setIsDetail(true)
+  } 
+
   return (
     <div>
-        {isSearching === yes && isSearchingType === yes2 && <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
+        {isSearching === yes && isSearchingType === yes2 && 
+        <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
         {data.map((pokemon) =>{
           const type = pokemon.types[0].type.name
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
     
           return(
             <div key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
-            border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}
-             >
-              
-                <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
-              
-             
+            border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}>
+              <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
               <p className='text-xl font-semibold mt-32'>{pokemon.id >=100 ? ('#' + pokemon.id) : pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id }</p>
               <p className='text-4xl capitalize font-semibold '>{pokemon.name}</p>
               <div className='flex gap-4'>
@@ -34,11 +39,11 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
                     <p>Height</p>
                   </div>
               </div>
-              <button className={`cursor-pointer bg-${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
+              <button onClick={() => {getPokemonDetail(pokemon.name)}} className={`cursor-pointer bg-${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
             </div>
           )
-          
         })}
+          <DetailPokemon pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
       </div>}
     </div>
     
