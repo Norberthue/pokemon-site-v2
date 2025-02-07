@@ -43,7 +43,7 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
             </div>
           )
         })}
-          <DetailPokemon pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
+          <DetailPokemon setPokeDetailName={setPokeDetailName} setIsDetail={setIsDetail} pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
       </div>}
     </div>
     

@@ -65,11 +65,17 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
     setPokeDetailName('')
   }
 
- 
+  function turnOffDetail() {
+    if (isDetail) {
+      setIsDetail(false)
+      setPokeDetailName('')
+    }
+  
+ }
 
   if (isLoading) return <div className='text-center bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (
-    <div id='pokemonList' className='bg-[#060b28] text-white -mt-15 pb-20'>
+    <div onClick={turnOffDetail} id='pokemonList' className='bg-[#060b28] text-white -mt-15 pb-20'>
         <div className='hidden bg-water bg-rock bg-ghost bg-electric bg-bug
         bg-poison bg-normal bg-grass bg-fairy bg-fire bg-fighting
         bg-psychic bg-ground bg-flying bg-dark bg-dragon bg-ice bg-steel
