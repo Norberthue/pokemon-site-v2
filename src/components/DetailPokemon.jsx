@@ -36,7 +36,8 @@ export default function DetailPokemon({pokeDetailName, isDetail, setIsDetail, se
     }}
     transition={{
       duration: 1,
-      type: 'spring', stiffness: 400, damping: 17
+      type: 'spring', stiffness: 400, damping: 17,
+      
     }}
     layout
     className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black-b max-w-[900px] w-full max-h-[400px]
@@ -50,7 +51,7 @@ export default function DetailPokemon({pokeDetailName, isDetail, setIsDetail, se
                     h-[400px] `}>
                       <img className='w-66 absolute bottom-52 lg:bottom-72'src={pokemon.sprites.other.home.front_default}></img>
                       <p className='text-xl font-semibold mt-54 sm:mt-34 '>{pokemon.id >=100 ? ('#' + pokemon.id) : pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id }</p>
-                      <p className='text-4xl capitalize font-semibold '>{pokemon.name}</p>
+                      <p className='text-4xl capitalize font-semibold line-clamp-1'>{pokemon.name}</p>
                       <div className='flex gap-4'>
                         <p className={`bg-${type} pt-2 pb-2 pl-4 pr-6 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type}.svg`}></img>{pokemon.types[0].type.name}</p>
                         {pokemon.types[1] && <p className={`bg-${type2} pt-2 pb-2 pl-4 pr-6 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type2}.svg`}></img>{pokemon.types[1].type.name}</p>}

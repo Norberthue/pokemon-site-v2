@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DetailPokemon from './DetailPokemon'
-
+import { motion, AnimatePresence } from 'framer-motion'
 export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2 , pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
   
   
@@ -10,6 +10,7 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
   } 
 
   return (
+    <AnimatePresence mode='wait'>
     <div>
         {isSearching === yes && isSearchingType === yes2 && 
         <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
@@ -18,11 +19,25 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
     
           return(
-            <div key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
+            <motion.div
+            initial={{
+              opacity: 0,
+             
+            }}
+            animate={{
+              opacity:1,
+             
+            }}
+            transition={{
+              duration: 1,
+              ease: 'easeInOut'
+            }}
+            layout
+            key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
             border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}>
               <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
               <p className='text-xl font-semibold mt-32'>{pokemon.id >=100 ? ('#' + pokemon.id) : pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id }</p>
-              <p className='text-4xl capitalize font-semibold '>{pokemon.name}</p>
+              <p className='text-4xl capitalize font-semibold line-clamp-1'>{pokemon.name}</p>
               <div className='flex gap-4'>
                 <p className={`bg-${type} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type}.svg`}></img>{pokemon.types[0].type.name}</p>
                 {pokemon.types[1] && <p className={`bg-${type2} pt-2 pb-2 pl-4 pr-4 flex items-center gap-2 capitalize rounded-xl`}><img src={`../assets/pokemonTypes/${type2}.svg`}></img>{pokemon.types[1].type.name}</p>}
@@ -40,12 +55,13 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
                   </div>
               </div>
               <button onClick={() => {getPokemonDetail(pokemon.name)}} className={`cursor-pointer bg-${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
-            </div>
+            </motion.div>
           )
         })}
           <DetailPokemon setPokeDetailName={setPokeDetailName} setIsDetail={setIsDetail} pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
       </div>}
     </div>
+    </AnimatePresence>
     
   )
 }
