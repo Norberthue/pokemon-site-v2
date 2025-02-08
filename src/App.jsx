@@ -10,13 +10,18 @@ function App() {
   //detail info 
   const [pokeDetailName, setPokeDetailName] = useState('')
   const [isDetail, setIsDetail] = useState(false)
-  
+  const [isGengarDetail, setIsGengarDetail] = useState(false)
  
+  function turnOffGengarDetail() {
+    if (isGengarDetail) {
+      setIsGengarDetail(false)
+    }
+  }
 
   return (
-    <div  className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-30%  pt-10'>
+    <div onClick={turnOffGengarDetail}  className='bg-linear-to-b overflow-x-clip  from-violet-500 from-0% to-violet-950 to-30%  pt-10'>
       <Header></Header>
-      <MainContext></MainContext>
+      <MainContext isGengarDetail={isGengarDetail} setIsGengarDetail={setIsGengarDetail}></MainContext>
       <Waves></Waves>
       <PokemonList pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail}></PokemonList>
     </div>

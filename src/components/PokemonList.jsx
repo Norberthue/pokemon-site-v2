@@ -30,8 +30,6 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
   const currentPokeData = pokeData.slice(indexOfFirstPost, indexOfLastPost)
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
-  
-  
   async function pokeList() {
     setIsLoading(true);
     const res = await axios.get(url)
@@ -70,8 +68,7 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
       setIsDetail(false)
       setPokeDetailName('')
     }
-  
- }
+  }
 
   if (isLoading) return <div className='text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (

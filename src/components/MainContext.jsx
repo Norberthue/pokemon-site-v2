@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import axios from 'axios'
+import GengarDetail from './GengarDetail'
 
-export default function MainContext() {
-  return (
+export default function MainContext({isGengarDetail,setIsGengarDetail}) {
+    const [gengarData, setGengarData] = useState([])
+    
+    async function getGengar() {
+        const res = await axios.get('https://pokeapi.co/api/v2/pokemon/gengar')
+        setGengarData([res.data])
+        setIsGengarDetail(true)
+    }
+
+    return (
     <div className='flex flex-col lg:flex-row items-center relative justify-center mt-10   text-white lg:gap-40 pl-5 pr-5 sm:pl-24 sm:pr-24'>
         <div className='absolute -left-50 box-border'>
             <img src='assets/images/background-pokeball.svg'></img>
@@ -18,7 +28,7 @@ export default function MainContext() {
                 To steal the life of its target, it slips into the prey's shadow and silently waits for an opportunity. 
                 It can pass through other dimensions and appear anywhere.
             </p>
-            <motion.button whileTap={{scale : 0.80}} className='bg-white h-10 rounded-lg text-violet-800 font-semibold cursor-pointer'><i className="fa-solid fa-bolt-lightning mr-2"></i> More Details</motion.button>
+            <motion.button onClick={getGengar} whileTap={{scale : 0.80}} className='bg-white h-10 rounded-lg text-violet-800 font-semibold cursor-pointer'><i className="fa-solid fa-bolt-lightning mr-2"></i> More Details</motion.button>
         </div>
         
         <div className='flex lg:flex-col items-center gap-20 '>
@@ -32,7 +42,7 @@ export default function MainContext() {
         <div className='absolute -right-50 box-border '>
             <img src='assets/images/background-pokeball.svg'></img>
         </div>
-        
+        <GengarDetail isDetail={isGengarDetail} data={gengarData} setIsDetail={setIsGengarDetail}></GengarDetail>
     </div>
   )
 }
