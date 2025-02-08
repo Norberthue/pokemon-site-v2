@@ -9,8 +9,8 @@ export default function Header() {
             </g><defs><clipPath id="clip0_235_917"><rect width="153" height="56" fill="#fff"></rect></clipPath></defs></svg>
         </div>
         <div className='flex gap-5'>
-          <a href='https://github.com/Norberthue?tab=overview&from=2025-02-01&to=2025-02-09'><i className="fa-brands fa-github text-white text-3xl"></i></a> 
-          <a><i className="fa-brands fa-linkedin text-white text-3xl"></i></a>
+          <a target='blank' href='https://github.com/Norberthue?tab=overview&from=2025-02-01&to=2025-02-09'><i className="fa-brands fa-github text-white text-3xl"></i></a> 
+          <a target='blank'><i className="fa-brands fa-linkedin text-white text-3xl"></i></a>
         </div>
 
     </div>
