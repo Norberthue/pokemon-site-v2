@@ -10,7 +10,7 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
   } 
 
   return (
-    <AnimatePresence mode='wait'>
+    
     <div>
         {isSearching === yes && isSearchingType === yes2 && 
         <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
@@ -19,18 +19,18 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
     
           return(
+            <AnimatePresence mode='wait'>
             <motion.div
             initial={{
               opacity: 0,
-             
+              y:20
             }}
             animate={{
               opacity:1,
-             
+              y:0
             }}
             transition={{
               duration: 1,
-              ease: 'easeInOut'
             }}
             layout
             key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
@@ -56,12 +56,13 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
               </div>
               <button onClick={() => {getPokemonDetail(pokemon.name)}} className={`cursor-pointer bg-${type} w-full pt-3 pb-3 rounded-b-2xl font-semibold`}><i className="fa-solid fa-bolt-lightning mr-2"></i>More details</button>
             </motion.div>
+            </AnimatePresence>
           )
         })}
           <DetailPokemon setPokeDetailName={setPokeDetailName} setIsDetail={setIsDetail} pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
       </div>}
     </div>
-    </AnimatePresence>
+    
     
   )
 }
