@@ -70,7 +70,7 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
     }
   }
 
-  if (isLoading) return <div className='text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
+  
   return (
     <div onClick={turnOffDetail} id='pokemonList' className='bg-[#060b28] text-white -mt-15 pb-20'>
         <div className='hidden bg-water bg-rock bg-ghost bg-electric bg-bug
@@ -89,14 +89,17 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
           </div>
          
           <div className='flex flex-col lg:flex-row  justify-between items-center gap-5  pr-4'>
-              <SearchByType setIsSearchingType={setIsSearchingType}  setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
-              <SearchPokemons setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
+              <SearchByType isLoading={isLoading} setIsLoading={setIsLoading} setIsSearchingType={setIsSearchingType}  setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
+              <SearchPokemons  isLoading={isLoading} setIsLoading={setIsLoading} setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
           </div>
         </div>
         
-        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
-        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
-        <PokeGenerator pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
+        <PokeGenerator isLoading={isLoading}  pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail}
+         isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
+        <PokeGenerator isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
+         isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
+        <PokeGenerator isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
+         isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
         
         {isSearching === false && isSearchingType === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
     </div>

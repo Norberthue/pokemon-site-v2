@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType}) {
-    const [isLoading, setIsLoading] = useState(false)
-    
-    
+export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType , isLoading, setIsLoading}) {
     async function getSoloPokemon(pokeName) {
         try{
             if (pokeName !== '') {
@@ -23,8 +20,6 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
             }
         }
     }
-
-   
 
     function changeName(event) {
         setPokeName(event.target.value)

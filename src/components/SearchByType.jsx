@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-export default function SearchByType({setDataPokemonType, setIsSearchingType, setIsSearching}) {
+export default function SearchByType({setDataPokemonType, setIsSearchingType, setIsSearching ,isLoading, setIsLoading}) {
   const [types, setTypes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+
 
 
   async function getPokemonTypeUrl(url) {
@@ -37,7 +37,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
   },[])
 
 
-  if (isLoading) return <div className='text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#060b28] text-white  '>LOADING...</div>;
+  
 
     return (
     <div className='flex flex-col gap-2 max-w-[300px] items-center lg:items-start lg:max-w-[550px] lg:ml-5 xl:ml-0'>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import DetailPokemon from './DetailPokemon'
 import { motion, AnimatePresence } from 'framer-motion'
-export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2 , pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
+import Spinner from 'react-bootstrap/Spinner';
+export default function PokeGenerator({isSearching, data, yes, isSearchingType, yes2 , pokeDetailName, setPokeDetailName, isDetail ,setIsDetail , isLoading}) {
   
   
   function getPokemonDetail(pokemon) {
@@ -9,6 +10,8 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
       setIsDetail(true)
   } 
 
+
+  if (isLoading) return  <div className='text-center  bg-[#060b28] text-white -mt-15 pb-20 h-screen w-screen'>LOADING...</div>;
   return (
     
     <div>
@@ -19,7 +22,7 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
           const type2 = pokemon.types[1] ? pokemon.types[1].type.name : ''
     
           return(
-            <AnimatePresence mode='wait'>
+            <AnimatePresence key={pokemon.id} mode='wait'>
             <motion.div
             initial={{
               opacity: 0,
@@ -32,8 +35,7 @@ export default function PokeGenerator({isSearching, data, yes, isSearchingType, 
             transition={{
               duration: 1,
             }}
-            layout
-            key={pokemon.id} className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
+            className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
             border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}>
               <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
               <p className='text-xl font-semibold mt-32'>{pokemon.id >=100 ? ('#' + pokemon.id) : pokemon.id >=10 ? ('#0'+ pokemon.id) : '#00'+ pokemon.id }</p>
