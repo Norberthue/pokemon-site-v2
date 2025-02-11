@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 @theme {
@@ -55,6 +56,22 @@ html {
   --tw-bg-opacity: 1;
   background-color: rgba(0,0,0, 0.5);
   backdrop-filter: blur(15px)
+}
+
+
+ .img-circle{
+  width: 200px;
+  height: 200px;
+  animation-name: rotate;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border-radius: 50%;
+}
+
+@keyframes rotate{
+  from{ transform: rotate(-360deg); }
+  to{ transform: rotate(360deg); }
 }
 
 

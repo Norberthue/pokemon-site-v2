@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios';
 
-export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType , isLoading, setIsLoading}) {
+export default function SearchPokemons({setDataPokeName, setIsSearching , pokeName, setPokeName, setIsSearchingType , setIsLoading, setError,}) {
+    
     async function getSoloPokemon(pokeName) {
         try{
             if (pokeName !== '') {
+                setError(false)
                 setIsLoading(true)
                 var res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
                 setIsSearchingType(false)
@@ -17,6 +19,8 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
                 console.log('type error')
             } else {
                 console.log('404 err')
+                setIsLoading(false)
+                setError(true)
             }
         }
     }

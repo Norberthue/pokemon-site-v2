@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Pagination from './Pagination';
 import SearchPokemons from './SearchPokemons';
-import { motion , AnimatePresence } from 'framer-motion'
 import PokeGenerator from './PokeGenerator';
+import PokeGeneratorSearch from './PokeGeneratorSearch';
+import PokeGeneratorType from './PokeGeneratorType';
 import SearchByType from './SearchByType'
 
 export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
@@ -16,10 +17,16 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
   const [isSearching, setIsSearching] = useState(false)
   const [pokeName, setPokeName] = useState('')
   const [dataPokeName, setDataPokeName] = useState([])
+  const [error, setError] = useState(false)
 
   //search by type
   const [dataPokemonType, setDataPokemonType] = useState([])
   const [isSearchingType, setIsSearchingType] = useState(false)
+  const [currentPageType, setCurrentPageType] = useState(1)
+  const [postsPerPageType] = useState(9)
+  const indexOfLastPostType = currentPageType * postsPerPageType;
+  const currentDataPokemonType = dataPokemonType.slice(0, indexOfLastPostType)
+  const paginateType = (pageNumber) => setCurrentPageType(pageNumber)
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,6 +68,8 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
     setIsSearchingType(false)
     setIsDetail(false)
     setPokeDetailName('')
+    setError(false)
+    setCurrentPageType(1)
   }
 
   function turnOffDetail() {
@@ -89,19 +98,22 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
           </div>
          
           <div className='flex flex-col lg:flex-row  justify-between items-center gap-5  pr-4'>
-              <SearchByType isLoading={isLoading} setIsLoading={setIsLoading} setIsSearchingType={setIsSearchingType}  setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
-              <SearchPokemons  isLoading={isLoading} setIsLoading={setIsLoading} setDataPokeName={setDataPokeName} pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
+              <SearchByType setCurrentPageType={setCurrentPageType} setIsLoading={setIsLoading} error={error} setError={setError} setIsSearchingType={setIsSearchingType}
+                setIsSearching={setIsSearching} setDataPokemonType={setDataPokemonType}></SearchByType>
+              <SearchPokemons  setError={setError} error={error}   setIsLoading={setIsLoading} setDataPokeName={setDataPokeName}
+               pokeName={pokeName} setPokeName={setPokeName} setIsSearching={setIsSearching} setIsSearchingType={setIsSearchingType} ></SearchPokemons>
           </div>
         </div>
         
-        <PokeGenerator isLoading={isLoading}  pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName} isDetail={isDetail} setIsDetail={setIsDetail}
-         isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokemonType} yes={false} yes2={true}></PokeGenerator>
-        <PokeGenerator isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
-         isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={dataPokeName} yes={true}  yes2={false}></PokeGenerator>
-        <PokeGenerator isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
-         isDetail={isDetail} setIsDetail={setIsDetail} isSearchingType={isSearchingType} isSearching={isSearching} data={currentPokeData} yes={false}  yes2={false}></PokeGenerator>
         
-        {isSearching === false && isSearchingType === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
+        {isSearchingType === false && isSearching === false && <PokeGenerator error={error} isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
+         isDetail={isDetail} setIsDetail={setIsDetail} data={currentPokeData}></PokeGenerator>}
+        {isSearchingType && <PokeGeneratorType currentPageType={currentPageType} error={error} paginateType={paginateType} isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
+         isDetail={isDetail} setIsDetail={setIsDetail} data={currentDataPokemonType}></PokeGeneratorType>}
+        {isSearching && <PokeGeneratorSearch error={error} isLoading={isLoading} pokeDetailName={pokeDetailName} setPokeDetailName={setPokeDetailName}
+         isDetail={isDetail} setIsDetail={setIsDetail} data={dataPokeName}></PokeGeneratorSearch>}
+        
+        {isSearching === false && isSearchingType === false && error === false && <Pagination activePage={activePage} setActivePage={setActivePage} paginate={paginate} totalPosts={pokeData.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>}
     </div>
   )
 }

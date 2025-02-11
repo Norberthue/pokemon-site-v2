@@ -1,10 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-export default function SearchByType({setDataPokemonType, setIsSearchingType, setIsSearching ,isLoading, setIsLoading}) {
+export default function SearchByType({setDataPokemonType, setIsSearchingType, setIsSearching ,setIsLoading, setError, setCurrentPageType }) {
   const [types, setTypes] = useState([])
-
-
 
   async function getPokemonTypeUrl(url) {
     const res = await axios.get(url)
@@ -13,6 +11,8 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
 
   async function getPokemonType(res) {
     res.map(async (item) => {
+        setCurrentPageType(1)
+        setError(false)
         setIsSearching(false)
         setIsLoading(true)
         setIsSearchingType(true)
@@ -24,8 +24,7 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
           return state;
       })
         setIsLoading(false)
-    }) 
-    
+    })  
   }
 
   useEffect(() => {
@@ -35,9 +34,6 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
     } 
     getAllTypes().catch(console.error)
   },[])
-
-
-  
 
     return (
     <div className='flex flex-col gap-2 max-w-[300px] items-center lg:items-start lg:max-w-[550px] lg:ml-5 xl:ml-0'>

@@ -1,25 +1,24 @@
 import React from 'react'
 import DetailPokemon from './DetailPokemon'
 import { motion, AnimatePresence } from 'framer-motion'
-
 import Loading from './Loading';
 import Error from './Error';
-export default function PokeGenerator({data, isDetail ,setIsDetail , isLoading, setPokeDetailName, pokeDetailName, error}) {
+export default function PokeGenerator({ data, isDetail ,setIsDetail , isLoading, setPokeDetailName, pokeDetailName ,paginateType, error, currentPageType}) {
   
-  
-  function getPokemonDetail(pokemon) {
+    function getPokemonDetail(pokemon) {
       setPokeDetailName(pokemon)
       setIsDetail(true)
   } 
 
-  
+  function goUp() {
+    window.location.href = '#pokemonList'
+  }
+
   if (error) return  <Error></Error>
   if (isLoading) return  <Loading></Loading>
   
-  return (
-    
+  return ( 
     <div>
-       
         <div className='pt-42 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pl-10 pr-10 xl:pl-0 xl:pr-0 gap-y-48 gap-x-10 max-w-[1200px] m-auto'>
         {data.map((pokemon) =>{
           const type = pokemon.types[0].type.name
@@ -39,6 +38,7 @@ export default function PokeGenerator({data, isDetail ,setIsDetail , isLoading, 
             transition={{
               duration: 1,
             }}
+            
             className={`justify-self-center flex  flex-col justify-between items-center max-w-[400px] 
             border-[0.9px] w-full h-[400px]  border-[#1a1f38] rounded-4xl bg-linear-to-b from-${type} from-0% to-[#060b28]  to-85% relative`}>
               <img className='w-66 absolute bottom-72'src={pokemon.sprites.other.home.front_default}></img>
@@ -66,6 +66,13 @@ export default function PokeGenerator({data, isDetail ,setIsDetail , isLoading, 
           )
         })}
           <DetailPokemon setPokeDetailName={setPokeDetailName} setIsDetail={setIsDetail} pokeDetailName={pokeDetailName} isDetail={isDetail}></DetailPokemon>
+      </div>
+      <div  className='flex items-center justify-center gap-2 mt-10 mb-2'>
+        <button onClick={() => {paginateType(currentPageType <= 8 ? currentPageType + 1 : currentPageType)}} className=' flex p-3 font-semibold gap-2 bg-linear-to-b cursor-pointer from-[#151a37)] from-0% to-[#151a37] to-100% border-[0.9px] border-[#24293f] rounded-xl'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" viewBox="0 0 25 24"><path fill="#fff" d="M12.5 2C10.5222 2 8.58879 2.58649 6.9443 3.6853C5.29981 4.78412 4.01809 6.3459 3.26121 8.17317C2.50433 10.0004 2.3063 12.0111 2.69215 13.9509C3.078 15.8907 4.03041 17.6725 5.42894 19.0711C6.82746 20.4696 8.60929 21.422 10.5491 21.8079C12.4889 22.1937 14.4996 21.9957 16.3268 21.2388C18.1541 20.4819 19.7159 19.2002 20.8147 17.5557C21.9135 15.9112 22.5 13.9778 22.5 12C22.5 10.6868 22.2413 9.38642 21.7388 8.17317C21.2363 6.95991 20.4997 5.85752 19.5711 4.92893C18.6425 4.00035 17.5401 3.26375 16.3268 2.7612C15.1136 2.25866 13.8132 2 12.5 2ZM12.5 20C10.9178 20 9.37104 19.5308 8.05544 18.6518C6.73985 17.7727 5.71447 16.5233 5.10897 15.0615C4.50347 13.5997 4.34504 11.9911 4.65372 10.4393C4.9624 8.88743 5.72433 7.46197 6.84315 6.34315C7.96197 5.22433 9.38743 4.4624 10.9393 4.15372C12.4911 3.84504 14.0997 4.00346 15.5615 4.60896C17.0233 5.21447 18.2727 6.23984 19.1518 7.55544C20.0308 8.87103 20.5 10.4177 20.5 12C20.5 14.1217 19.6572 16.1566 18.1569 17.6569C16.6566 19.1571 14.6217 20 12.5 20ZM16.5 11H13.5V8C13.5 7.73478 13.3946 7.48043 13.2071 7.29289C13.0196 7.10536 12.7652 7 12.5 7C12.2348 7 11.9804 7.10536 11.7929 7.29289C11.6054 7.48043 11.5 7.73478 11.5 8V11H8.5C8.23479 11 7.98043 11.1054 7.7929 11.2929C7.60536 11.4804 7.5 11.7348 7.5 12C7.5 12.2652 7.60536 12.5196 7.7929 12.7071C7.98043 12.8946 8.23479 13 8.5 13H11.5V16C11.5 16.2652 11.6054 16.5196 11.7929 16.7071C11.9804 16.8946 12.2348 17 12.5 17C12.7652 17 13.0196 16.8946 13.2071 16.7071C13.3946 16.5196 13.5 16.2652 13.5 16V13H16.5C16.7652 13 17.0196 12.8946 17.2071 12.7071C17.3946 12.5196 17.5 12.2652 17.5 12C17.5 11.7348 17.3946 11.4804 17.2071 11.2929C17.0196 11.1054 16.7652 11 16.5 11Z"></path></svg>Load more pokémon
+            
+        </button>
+        <button onClick={goUp} className='p-3 font-semibold gap-2 bg-linear-to-b cursor-pointer from-[#151a37)] from-0% to-[#151a37] to-100% border-[0.9px] border-[#24293f] rounded-xl'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M17.71 11.29L12.71 6.29002C12.6149 6.19898 12.5028 6.12761 12.38 6.08002C12.1365 5.98 11.8635 5.98 11.62 6.08002C11.4973 6.12761 11.3851 6.19898 11.29 6.29002L6.29 11.29C6.19676 11.3833 6.1228 11.4939 6.07234 11.6158C6.02188 11.7376 5.99591 11.8682 5.99591 12C5.99591 12.2663 6.1017 12.5217 6.29 12.71C6.47831 12.8983 6.7337 13.0041 7 13.0041C7.2663 13.0041 7.5217 12.8983 7.71 12.71L11 9.41002V17C11 17.2652 11.1054 17.5196 11.2929 17.7071C11.4804 17.8947 11.7348 18 12 18C12.2652 18 12.5196 17.8947 12.7071 17.7071C12.8946 17.5196 13 17.2652 13 17V9.41002L16.29 12.71C16.383 12.8037 16.4936 12.8781 16.6154 12.9289C16.7373 12.9797 16.868 13.0058 17 13.0058C17.132 13.0058 17.2627 12.9797 17.3846 12.9289C17.5064 12.8781 17.617 12.8037 17.71 12.71C17.8037 12.6171 17.8781 12.5065 17.9289 12.3846C17.9797 12.2627 18.0058 12.132 18.0058 12C18.0058 11.868 17.9797 11.7373 17.9289 11.6154C17.8781 11.4936 17.8037 11.383 17.71 11.29Z"></path></svg></button>
       </div>
       
     </div>
