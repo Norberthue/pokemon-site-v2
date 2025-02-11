@@ -35,7 +35,7 @@ export default function SearchPokemons({setDataPokeName, setIsSearching , pokeNa
     }
 
     return (
-    <div className='flex mr-10 xl:mr-0 lg:self-end'>
+    <div className='flex mr-10  xl:mr-0 lg:self-end'>
         <form onSubmit={submitForm} className='group'>
             <div className='relative'>
                 <input className='border-2 group-hover:border-blue-500 border-[#223ba8] duration-200 pt-4 pb-4 pl-4 pr-14  md:pr-48 rounded-tl-2xl rounded-bl-2xl  outline-none' value={pokeName}  onChange={(event) => {changeName(event)}} placeholder='Search Pokémon'  ></input>
