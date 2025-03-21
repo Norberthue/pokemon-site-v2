@@ -9,7 +9,7 @@ import SearchByType from './SearchByType'
 
 export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetail ,setIsDetail}) {
   //list of pokemons
-  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?limit=99&offset=0')
+  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0')
   const [pokeData, setPokeData] = useState([])
   const [isLoading, setIsLoading] = useState(false);
  
@@ -39,19 +39,30 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
 
   async function pokeList() {
     setIsLoading(true);
-    const res = await axios.get(url)
-    getPokemon(res.data.results);
+    try {
+      const res = await axios.get(url)
+      getPokemon(res.data.results);
+    } catch (error) {
+      console.log(error)
+    }
+    
+   
     setIsLoading(false)
   }
 
   async function getPokemon(res) {
     res.map(async (item) =>{
-      const result = await axios.get(item.url)
-      setPokeData(state => {
+      try {
+        const result = await axios.get(item.url)
+        setPokeData(state => {
         state = [...state, result.data] 
         state.sort((a, b) => a.id > b.id ? 1 : -1)
         return state;
       })
+     } catch (error) {
+      console.log(error)
+      }
+      
     }) 
   }
 

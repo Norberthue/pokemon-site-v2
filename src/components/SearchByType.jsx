@@ -5,31 +5,41 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
   const [types, setTypes] = useState([])
 
   async function getPokemonTypeUrl(url) {
-    const res = await axios.get(url)
-    getPokemonType(res.data.pokemon)
+    try {
+      const res = await axios.get(url)
+      getPokemonType(res.data.pokemon)
+    } catch (err) {
+      console.log(err)
+    }
+    
   }
 
   async function getPokemonType(res) {
+   try {
     res.map(async (item) => {
-        setCurrentPageType(1)
-        setError(false)
-        setIsSearching(false)
-        setIsLoading(true)
-        setIsSearchingType(true)
-        setDataPokemonType([])
-        const result = await axios.get(item.pokemon.url)
-        setDataPokemonType((state) => {
-          state = [...state, result.data] 
-          state.sort((a, b) => a.id > b.id ? 1 : -1)
-          return state;
+      setCurrentPageType(1)
+      setError(false)
+      setIsSearching(false)
+      setIsLoading(true)
+      setIsSearchingType(true)
+      setDataPokemonType([])
+      const result = await axios.get(item.pokemon.url)
+      setDataPokemonType((state) => {
+        state = [...state, result.data] 
+        state.sort((a, b) => a.id > b.id ? 1 : -1)
+        return state;
       })
-        setIsLoading(false)
-    })  
+      setIsLoading(false)
+        })  
+   } catch (error) {
+    console.log(error)
+   }
+    
   }
 
   useEffect(() => {
     const getAllTypes = async () => {
-        const res = await axios.get('https://pokeapi.co/api/v2/type/?limit=18&offset=0')
+        const res = await axios.get('https://pokeapi.co/api/v2/type/')
         setTypes(res.data.results)
     } 
     getAllTypes().catch(console.error)
