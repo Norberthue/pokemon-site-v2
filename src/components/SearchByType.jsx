@@ -32,14 +32,14 @@ export default function SearchByType({setDataPokemonType, setIsSearchingType, se
       setIsLoading(false)
         })  
    } catch (error) {
-    console.log(error)
+      console.log(error)
    }
     
   }
 
   useEffect(() => {
     const getAllTypes = async () => {
-        const res = await axios.get('https://pokeapi.co/api/v2/type/')
+        const res = await axios.get('https://pokeapi.co/api/v2/type?limit=18&offset=0')
         setTypes(res.data.results)
     } 
     getAllTypes().catch(console.error)

@@ -45,8 +45,6 @@ export default function PokemonList({ pokeDetailName, setPokeDetailName, isDetai
     } catch (error) {
       console.log(error)
     }
-    
-   
     setIsLoading(false)
   }
 
