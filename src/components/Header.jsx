@@ -10,7 +10,7 @@ export default function Header() {
         </div>
         <div className='flex gap-5'>
           <a target='blank' href='https://github.com/Norberthue?tab=overview&from=2025-02-01&to=2025-02-09'><i className="fa-brands fa-github text-white text-3xl"></i></a> 
-          <a target='blank'><i className="fa-brands fa-linkedin text-white text-3xl"></i></a>
+          <a target='blank' href='https://www.linkedin.com/in/norbert-koka-9b1a82307/'><i className="fa-brands fa-linkedin text-white text-3xl"></i></a>
         </div>
 
     </div>
